@@ -1,10 +1,7 @@
-//
-//  Implementations.hpp
-//  CECS328_Project1
-//
-//  Created by Andrew Gomez on 10/7/19.
-//  Copyright © 2019 Andrew Gomez. All rights reserved.
-//
+// Name: Andrew Gomez
+// Class: CECS328
+// Project: Project 1
+// Due Date: 10/18/19
 
 #ifndef Implementations_hpp
 #define Implementations_hpp
