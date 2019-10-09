@@ -1,15 +1,30 @@
-//
-//  main.cpp
-//  CECS328_Project1
-//
-//  Created by Andrew Gomez on 9/27/19.
-//  Copyright © 2019 Andrew Gomez. All rights reserved.
-//
+// Name: Andrew Gomez
+// Class: CECS328
+// Project: Project 1
+// Due Date: 10/18/19
+
 
 #include <iostream>
+#include "Implementations.hpp"
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+using namespace std;
+
+int main() {
+    int test[] = {-2, -3, 4, -1, -2, 1, 5, -3};
+    int size_of_test = 8;
+    int max = 0;
+    
+    max= Solution1(test, size_of_test);
+    cout << "The maximum subarray from 1 is: " << max << endl;
+    
+    max= Solution2(test, size_of_test);
+    cout << "The maximum subarray from 2 is: " << max << endl;
+    
+    max= Solution3(test, 0, size_of_test-1);
+    cout << "The maximum subarray from 3 is: " << max << endl;
+    
+    max= Solution4(test, size_of_test);
+    cout << "The maximum subarray from 2 is: " << max << endl;
+    
     return 0;
 }
