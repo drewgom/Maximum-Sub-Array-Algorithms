@@ -16,15 +16,18 @@ int main() {
     
     max= Solution1(test, size_of_test);
     cout << "The maximum subarray from 1 is: " << max << endl;
+    max = 0;
     
     max= Solution2(test, size_of_test);
     cout << "The maximum subarray from 2 is: " << max << endl;
+    max = 0;
     
     max= Solution3(test, 0, size_of_test-1);
     cout << "The maximum subarray from 3 is: " << max << endl;
+    max = 0;
     
     max= Solution4(test, size_of_test);
-    cout << "The maximum subarray from 2 is: " << max << endl;
+    cout << "The maximum subarray from 4 is: " << max << endl;
     
     return 0;
 }

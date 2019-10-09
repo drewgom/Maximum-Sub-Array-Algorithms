@@ -135,10 +135,10 @@ int Solution3_find_max_crossing(int arr[], int left, int mid, int right)    {
     // This finds the maximum sub array between mid+1 and right that MUST INCLUDE
     // the element arr[mid+1]
     sum = 0;
-    for (int i = mid+1; i<=left; i++) {
+    for (int i = mid+1; i<=right; i++) {
         sum += arr[i];
         
-        if(sum > max_left_sum)  {
+        if(sum > max_right_sum)  {
             max_right_sum = sum;
         }
     }
@@ -170,7 +170,7 @@ int Solution4(int arr[], int size)  {
     // Iterates through the whole list, and checks the two conditions
     for(int i = 0; i < size; i++)  {
         
-        current_sum = arr[i];
+        current_sum += arr[i];
         
         // Checks to see if the new sum is the maximum
         if(current_sum > max_sum)   {
