@@ -14,9 +14,10 @@
 const int NEGATIVE_INFINITY = -2147483648;
 
 
-int Solution1(int arr[], int size);
-int Solution2(int arr[], int size);
-int Solution3(int arr[], int left, int right);
-int Solution3_find_max_crossing(int arr[], int left, int mid, int right);
-int Solution4(int arr[], int size);
+int MSS1(int arr[], int size);
+int MSS2(int arr[], int size);
+int MSS3(int arr[], int left, int right);
+int MSS3_find_max_crossing(int arr[], int left, int mid, int right);
+int MSS4(int arr[], int size);
+
 #endif

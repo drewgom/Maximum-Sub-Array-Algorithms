@@ -5,13 +5,27 @@
 
 
 #include <iostream>
+#include "MenuOption.hpp"
 #include "Implementations.hpp"
 #include "Timer.hpp"
 
 
 using namespace std;
 
+void testfunction();
+
 int main() {
+    
+    string testd  = "This is our test";
+    MenuOption testop(testd, &testfunction);
+    testop.runOperation();
+    
+    
+    
+    
+    
+    
+    
     Timer testTimer;
     int test[] = { -2, -3, 4, -1, -2,
                     1, 5, -3, 3, 4,
@@ -23,7 +37,7 @@ int main() {
     int max = 0;
     
     testTimer.start_timer();
-    max= Solution1(test, size_of_test);
+    max= MSS1(test, size_of_test);
     testTimer.stop_timer();
     cout << "The maximum subarray from SOLUTION 1 is: " << max << endl;
     cout << "The time elapsed by SOLUTION 1 is: " << testTimer.get_time() << " ns" << endl;
@@ -31,7 +45,7 @@ int main() {
     max = 0;
     
     testTimer.start_timer();
-    max= Solution2(test, size_of_test);
+    max= MSS2(test, size_of_test);
     testTimer.stop_timer();
     cout << "The maximum subarray from SOLUTION 2 is: " << max << endl;
     cout << "The time elapsed by SOLUTION 2 is: " << testTimer.get_time() << " ns" << endl;
@@ -39,7 +53,7 @@ int main() {
     max = 0;
     
     testTimer.start_timer();
-    max= Solution3(test, 0, size_of_test-1);
+    max= MSS3(test, 0, size_of_test-1);
     testTimer.stop_timer();
     cout << "The maximum subarray from SOLUTION 3 is: " << max << endl;
     cout << "The time elapsed by SOLUTION 3 is: " << testTimer.get_time() << " ns" << endl;
@@ -47,7 +61,7 @@ int main() {
     max = 0;
     
     testTimer.start_timer();
-    max= Solution4(test, size_of_test);
+    max= MSS4(test, size_of_test);
     testTimer.stop_timer();
     cout << "The maximum subarray from SOLUTION 4 is: " << max << endl;
     cout << "The time elapsed by SOLUTION 4 is: " << testTimer.get_time() << " ns" << endl;
@@ -55,5 +69,11 @@ int main() {
     
     
     
+    
     return 0;
+}
+
+
+void testfunction() {
+    cout << "Hello World" << endl;
 }

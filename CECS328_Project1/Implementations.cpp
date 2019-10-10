@@ -8,14 +8,14 @@
 using namespace std;
 
 
-// IMPLEMENTATION 1: Bad Brute Force Implementation
+// MSS IMPLEMENTATION 1: Bad Brute Force Implementation
 // This implementation is the simplest. All this algorithm does is goes through
 // every element, and checks every sub array that starts with that element.
 // It also has a for loop that iterates over every element to add its value to the
 // current sub array being tested.
 // ESTIMATED RUN TIME: O(n^3)
 
-int Solution1(int arr[], int size) {
+int MSS1(int arr[], int size) {
     int max_sum = 0;
     
     
@@ -40,13 +40,13 @@ int Solution1(int arr[], int size) {
 
 
 
-// IMPLEMENTATION 2: Good(?) Brute Force Implementation
+// MSS IMPLEMENTATION 2: Good(?) Brute Force Implementation
 // This implementation is the same as IMPLEMENATION 1, except it adds the values
 // continually as it iterates through each subarray. This allows for there to be
 // one less for loop.
 // ESTIMATED RUN TIME: O(n^2)
 
-int Solution2(int arr[], int size)  {
+int MSS2(int arr[], int size)  {
     int max_sum = 0;
     
     
@@ -68,16 +68,16 @@ int Solution2(int arr[], int size)  {
 
 
 
-// IMPLEMENTATON 3: Divide and Conquer
+// MSS IMPLEMENTATON 3: Divide and Conquer
 // This implementation relys on two functions:
-//      1. Solution3
-//      2. Solution3_find_max_crossing()
+//      1. MSS3
+//      2. MSS3_find_max_crossing()
 // The first function recursively finds the maximum subarray that spans between
 // 2 indices. The second function takes in two arguments: The left subarray and
 // the right subarray.
 // ESTIMATED RUN TIME: O(n lg(n))
 
-int Solution3(int arr[], int left, int right) {
+int MSS3(int arr[], int left, int right) {
     
     
     // BASE CASE 1: If left and right are equal
@@ -98,13 +98,13 @@ int Solution3(int arr[], int left, int right) {
     int mid = (left+right)/2;
     
     // Gets the maximum subarray from the left side
-    int max_from_left = Solution3(arr, left, mid);
+    int max_from_left = MSS3(arr, left, mid);
     
     // Gets the maximum subarray from the right side
-    int max_from_right = Solution3(arr, mid+1, right);
+    int max_from_right = MSS3(arr, mid+1, right);
     
     // Gets the maximum subarray that crosses over the the the index of middle
-    int max_from_middle = Solution3_find_max_crossing(arr, left, mid, right);
+    int max_from_middle = MSS3_find_max_crossing(arr, left, mid, right);
     
     // Whichever of those three is largest has to be the largest subarray from left to right
     return max( max(max_from_left, max_from_right), max_from_middle);
@@ -112,7 +112,7 @@ int Solution3(int arr[], int left, int right) {
 }
 
 
-int Solution3_find_max_crossing(int arr[], int left, int mid, int right)    {
+int MSS3_find_max_crossing(int arr[], int left, int mid, int right)    {
     int max_left_sum = NEGATIVE_INFINITY;
     int max_right_sum = NEGATIVE_INFINITY;
     int sum;
@@ -148,7 +148,7 @@ int Solution3_find_max_crossing(int arr[], int left, int mid, int right)    {
 
 
 
-// IMPLEMENTATON 4: Clever Solution
+// MSS IMPLEMENTATON 4: Clever Solution
 // The clever solution works by realizing that for whatever value the
 // maximum subarray starts on, that sum of all the previous elements in
 // the array has to be less than or equal to 0.
@@ -160,7 +160,7 @@ int Solution3_find_max_crossing(int arr[], int left, int mid, int right)    {
 // can just reassign that to 0.
 // ESTIMATED RUN TIME: O(n)
 
-int Solution4(int arr[], int size)  {
+int MSS4(int arr[], int size)  {
     int max_sum = 0;
     int current_sum = 0;
     
@@ -184,3 +184,7 @@ int Solution4(int arr[], int size)  {
     
     return max_sum;
 }
+
+
+
+// INTRUCTIONS STEP 1: 

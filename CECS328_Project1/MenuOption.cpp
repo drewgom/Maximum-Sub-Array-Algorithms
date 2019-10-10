@@ -4,3 +4,12 @@
 // Due Date: 10/18/19
 
 #include "MenuOption.hpp"
+
+MenuOption::MenuOption(string desc, void (*op)())    {
+    description = desc;
+    operation = op;
+}
+
+string MenuOption::get_decription() {   return description; }
+
+void MenuOption::runOperation()     {   (*operation)();     }

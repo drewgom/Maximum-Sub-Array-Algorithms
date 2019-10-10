@@ -13,7 +13,7 @@ using namespace std;
 
 class MenuOption    {
 private:
-    void (*Operation)();
+    void (*operation)();
     string description;
 public:
     MenuOption(string desc, void (*op)());
