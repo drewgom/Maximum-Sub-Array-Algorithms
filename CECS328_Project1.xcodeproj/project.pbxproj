@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3A86C5EC233E9F4F00375EB6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A86C5EB233E9F4F00375EB6 /* main.cpp */; };
 		3AB833AF234C30CB007EA717 /* Implementations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AB833AD234C30CB007EA717 /* Implementations.cpp */; };
+		3AC2E61D234FC82E00CBD778 /* Menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC2E61B234FC82E00CBD778 /* Menu.cpp */; };
+		3AC2E629234FD00100CBD778 /* MenuOption.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC2E627234FD00100CBD778 /* MenuOption.cpp */; };
 		3AFBAF20234E5DEC003A2FBE /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AFBAF1E234E5DEC003A2FBE /* Timer.cpp */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +31,10 @@
 		3A86C5EB233E9F4F00375EB6 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		3AB833AD234C30CB007EA717 /* Implementations.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Implementations.cpp; sourceTree = "<group>"; };
 		3AB833AE234C30CB007EA717 /* Implementations.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Implementations.hpp; sourceTree = "<group>"; };
+		3AC2E61B234FC82E00CBD778 /* Menu.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Menu.cpp; sourceTree = "<group>"; };
+		3AC2E61C234FC82E00CBD778 /* Menu.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Menu.hpp; sourceTree = "<group>"; };
+		3AC2E627234FD00100CBD778 /* MenuOption.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MenuOption.cpp; sourceTree = "<group>"; };
+		3AC2E628234FD00100CBD778 /* MenuOption.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MenuOption.hpp; sourceTree = "<group>"; };
 		3AFBAF1E234E5DEC003A2FBE /* Timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
 		3AFBAF1F234E5DEC003A2FBE /* Timer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Timer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,6 +74,10 @@
 				3AFBAF1F234E5DEC003A2FBE /* Timer.hpp */,
 				3AB833AD234C30CB007EA717 /* Implementations.cpp */,
 				3AB833AE234C30CB007EA717 /* Implementations.hpp */,
+				3AC2E61B234FC82E00CBD778 /* Menu.cpp */,
+				3AC2E61C234FC82E00CBD778 /* Menu.hpp */,
+				3AC2E627234FD00100CBD778 /* MenuOption.cpp */,
+				3AC2E628234FD00100CBD778 /* MenuOption.hpp */,
 			);
 			path = CECS328_Project1;
 			sourceTree = "<group>";
@@ -130,6 +140,8 @@
 			files = (
 				3AFBAF20234E5DEC003A2FBE /* Timer.cpp in Sources */,
 				3A86C5EC233E9F4F00375EB6 /* main.cpp in Sources */,
+				3AC2E61D234FC82E00CBD778 /* Menu.cpp in Sources */,
+				3AC2E629234FD00100CBD778 /* MenuOption.cpp in Sources */,
 				3AB833AF234C30CB007EA717 /* Implementations.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
