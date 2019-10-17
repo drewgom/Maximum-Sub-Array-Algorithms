@@ -3,7 +3,12 @@
 // Project: Project 1
 // Due Date: 10/18/19
 
+#include <iostream>
+#include <string>
+#include <sstream>
 #include "Implementations.hpp"
+#include "Timer.hpp"
+
 #include <algorithm>
 using namespace std;
 
@@ -16,7 +21,7 @@ using namespace std;
 // ESTIMATED RUN TIME: O(n^3)
 
 int MSS1(int arr[], int size) {
-    int max_sum = 0;
+    int max_sum = NEGATIVE_INFINITY;
     
     
     for (int i = 0; i < size; i++) {
@@ -47,7 +52,7 @@ int MSS1(int arr[], int size) {
 // ESTIMATED RUN TIME: O(n^2)
 
 int MSS2(int arr[], int size)  {
-    int max_sum = 0;
+    int max_sum = NEGATIVE_INFINITY;
     
     
     for (int i = 0; i < size; i++) {
@@ -161,7 +166,7 @@ int MSS3_find_max_crossing(int arr[], int left, int mid, int right)    {
 // ESTIMATED RUN TIME: O(n)
 
 int MSS4(int arr[], int size)  {
-    int max_sum = 0;
+    int max_sum = NEGATIVE_INFINITY;
     int current_sum = 0;
     
     // Iterates through the whole list, and checks the two conditions
@@ -187,4 +192,109 @@ int MSS4(int arr[], int size)  {
 
 
 
-// INTRUCTIONS STEP 1: 
+// INTRUCTIONS STEP 1: Takes in a comma-delimited array of integers, and
+// prints out the MSS from each function
+void Step1()    {
+    string comma_delimited_array;
+    
+    // Gets the list of integers and saves it as a string - since, to my
+    // knowledge, that is the only way to do this
+    cout << "Please enter a comma-delimited array of integers:" << endl;
+    getline(cin,comma_delimited_array);
+    int *arrayofvalues = NULL;
+    int size_of_array = 0;
+    get_array_of_ints(comma_delimited_array, arrayofvalues, size_of_array);
+    
+    // Here, we run each of the MSS functions.
+    
+    int max = 0;
+    max= MSS1(arrayofvalues, size_of_array);
+    cout << "The maximum subarray from SOLUTION 1 is: " << max << endl;
+    max = 0;
+    
+    max= MSS2(arrayofvalues, size_of_array);
+    cout << "The maximum subarray from SOLUTION 2 is: " << max << endl;
+    max = 0;
+    
+    max= MSS3(arrayofvalues, 0, size_of_array-1);
+    cout << "The maximum subarray from SOLUTION 3 is: " << max << endl;
+    max = 0;
+    
+    max= MSS4(arrayofvalues, size_of_array);
+    cout << "The maximum subarray from SOLUTION 4 is: " << max << endl;
+    
+    
+    
+    delete arrayofvalues;
+}
+
+void Step2()   {
+    
+    
+}
+
+
+void Step3()    {
+    
+}
+
+void Quit()    {
+    exit(0);
+}
+
+
+void get_array_of_ints(string comma_sep_string, int* &values, int &sizeofarr)   {
+    
+    // I need to use a string stream to get the data out of the string directly,
+    // Since I don't know its exact size.
+    stringstream stream_of_raw_text(comma_sep_string);
+    
+    // First, I find the number of commas. I did this because if there
+    // is n commas, then there are n+1 numbers.
+    sizeofarr = 1;
+    for(char i; stream_of_raw_text >> i;) {
+        if(i == ',')    {
+            sizeofarr++;
+        }
+    }
+    
+    // Now, I need to put all of the integers into an array
+    values = new int[sizeofarr];
+    
+    // After I have the array, I know that I can have a new string where it adds
+    // every integer to a string, and then knows that it needs to terminate once
+    // it hits a comma.
+    
+    stringstream second_stream_of_raw_text(comma_sep_string);
+    for(int i = 0; i < sizeofarr; i++)   {
+        // current_number_as_a_string is a string that adds all the characters
+        // that need to be in the next number. For example, if the next number
+        // in the array is 123, then current_number_as_a_string will be "", then
+        // "1" after the first pass of the loop, then "12" after the second pass,
+        // then "123" after the third pass. Once it is in this state, then we can
+        // convert it into an int.
+        
+        // I was having trouble getting the loop to detect the charcter '\0'. However,
+        // the terminating character for a string stream is saved as -1, so I was able
+        // to simply use that
+        
+        string current_number_as_a_string = "";
+        while (second_stream_of_raw_text.peek() != ',' && second_stream_of_raw_text.peek() != -1) {
+            char tempchar;
+            second_stream_of_raw_text >> tempchar;
+            current_number_as_a_string.append(1,tempchar);
+        }
+        // If the while loop ended, and the next character is ',' then we still
+        // want to run the code
+        if (second_stream_of_raw_text.peek() == ',')    {
+            char throwaway;
+            second_stream_of_raw_text >> throwaway;
+        }
+        
+        // Here, we convert current_number_as_a_string into an int, and add it to
+        // the array.
+        values[i] = stoi(current_number_as_a_string);
+    }
+    
+    
+}
