@@ -24,6 +24,7 @@ void Step1();
 void Step2();
 void Step3();
 void Quit();
-void get_array_of_ints(string comma_sep_string, int* &values, int &sizeofarr);
+void get_array_of_ints_from_string(string comma_sep_string, int* &values, int &sizeofarr, bool is_delimeter);
+void get_random_array(int* &rand_array, int size_of_rand_array);
 
 #endif

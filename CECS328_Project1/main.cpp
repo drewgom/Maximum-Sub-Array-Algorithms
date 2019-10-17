@@ -18,7 +18,8 @@ int main() {
     
     string testd  = "Acts as what the main function was";
     MenuOption testop(testd, &Step1);
-    testop.runOperation();
+    MenuOption testop2(testd, &Step2);
+    testop2.runOperation();
     
     return 0;
 }
