@@ -24,7 +24,6 @@ private:
 public:
     Menu(int projnum, string desc, string instr, int numofops, MenuOption *arrofops);
     void display_menu();
-    
 };
 
 

@@ -177,6 +177,8 @@ int MSS4(int arr[], int size)  {
         current_sum += arr[i];
         
         // Checks to see if the new sum is the maximum
+        
+        
         if(current_sum > max_sum)   {
             max_sum = current_sum;
         }
@@ -184,7 +186,7 @@ int MSS4(int arr[], int size)  {
         // Sets the current sum to zero if the current sum is less than zero, becuase
         // we know that the maximum will not start at any of the previous values if
         // that is the case
-        else if (current_sum < 0)  {
+        if (current_sum < 0)  {
             current_sum = 0;
         }
     }
@@ -467,8 +469,8 @@ int runMSS(int MSS_selection,int* array, int size_of_array)    {
             running_time = MSSTimer.get_time();
             
             // Displays the data from the trial
-            cout << "The maximum subarray from SOLUTION 2 is: " << max << endl;
-            cout << "The time elapsed by SOLUTION 2 is: " << MSSTimer.get_time() << " ns" << endl;
+            cout << "The maximum subarray from SOLUTION 3 is: " << max << endl;
+            cout << "The time elapsed by SOLUTION 3 is: " << MSSTimer.get_time() << " ns" << endl;
             
             // Resets data from trial to 0
             cout << endl;
