@@ -25,6 +25,8 @@ void Step2();
 void Step3();
 void Quit();
 void get_array_of_ints_from_string(string comma_sep_string, int* &values, int &sizeofarr, bool is_delimeter);
+int runMSS(int MSS_selection,int* array, int size_of_array);
+int get_predicted_running_time(int T, int m, int n, int MSS_num);
 void get_random_array(int* &rand_array, int size_of_rand_array);
 
 #endif

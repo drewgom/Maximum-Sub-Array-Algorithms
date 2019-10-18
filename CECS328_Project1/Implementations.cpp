@@ -6,6 +6,8 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <math.h>
+#include <iomanip>
 #include "Implementations.hpp"
 #include "Timer.hpp"
 
@@ -258,83 +260,9 @@ void Step2()   {
     // Takes the selection of MSSs that the user entered and turns it into an array of integers
     get_array_of_ints_from_string(MSS_selections, array_of_MSS_selections, size_of_array_of_selections, false);
     
-    // for every element in array_of_MSS_selections, if we input an MSS, find it and excute it
+    // for every element in array_of_MSS_selections, we run that MSS
     for (int i = 0; i < size_of_array_of_selections; i++)   {
-        int max = 0;
-        Timer MSSTimer;
-        
-        switch (array_of_MSS_selections[i]) {
-            case 1:
-                cout << "Running SOLUTION 1 . . ." << endl;
-                // Runs the algorithm and times it
-                MSSTimer.start_timer();
-                max = MSS1(randomized_array, size_of_randomized_array);
-                MSSTimer.stop_timer();
-                
-                // Displays the data from the trial
-                cout << "The maximum subarray from SOLUTION 1 is: " << max << endl;
-                cout << "The time elapsed by SOLUTION 1 is: " << MSSTimer.get_time() << " ns" << endl;
-                
-                // Resets data from trial to 0
-                cout << endl;
-                MSSTimer.reset_timer();
-                max = 0;
-                
-                break;
-            case 2:
-                cout << "Running SOLUTION 2 . . ." << endl;
-                // Runs the algorithm and times it
-                MSSTimer.start_timer();
-                max = MSS2(randomized_array, size_of_randomized_array);
-                MSSTimer.stop_timer();
-                
-                // Displays the data from the trial
-                cout << "The maximum subarray from SOLUTION 2 is: " << max << endl;
-                cout << "The time elapsed by SOLUTION 2 is: " << MSSTimer.get_time() << " ns" << endl;
-                
-                // Resets data from trial to 0
-                cout << endl;
-                MSSTimer.reset_timer();
-                max = 0;
-                
-                break;
-            case 3:
-                cout << "Running SOLUTION 3 . . ." << endl;
-                // Runs the algorithm and times it
-                MSSTimer.start_timer();
-                max = MSS3(randomized_array, 0, size_of_randomized_array-1);
-                MSSTimer.stop_timer();
-                
-                // Displays the data from the trial
-                cout << "The maximum subarray from SOLUTION 2 is: " << max << endl;
-                cout << "The time elapsed by SOLUTION 2 is: " << MSSTimer.get_time() << " ns" << endl;
-                
-                // Resets data from trial to 0
-                cout << endl;
-                MSSTimer.reset_timer();
-                max = 0;
-                
-                break;
-            case 4:
-                cout << "Running SOLUTION 4 . . ." << endl;
-                // Runs the algorithm and times it
-                MSSTimer.start_timer();
-                max = MSS4(randomized_array, size_of_randomized_array);
-                MSSTimer.stop_timer();
-                
-                // Displays the data from the trial
-                cout << "The maximum subarray from SOLUTION 4 is: " << max << endl;
-                cout << "The time elapsed by SOLUTION 4 is: " << MSSTimer.get_time() << " ns" << endl;
-                
-                // Resets data from trial to 0
-                cout << endl;
-                MSSTimer.reset_timer();
-                max = 0;
-                
-                break;
-            default:
-                break;
-        }
+        int running_time = runMSS(array_of_MSS_selections[i], randomized_array, size_of_randomized_array);
     }
     
     delete randomized_array;
@@ -347,16 +275,38 @@ void Step3()    {
     int n;
     int* randomized_array_m = NULL;
     int* randomized_array_n = NULL;
-    int time_elapsed_from_m;
-    int predicted_time_elapsed_from_n;
+    int running_time_of_m;
+    int running_time_of_n;
+    int predicted_running_time_of_n;
     
+    // Gets the data from the user
     cout << "Please enter a MSS algorithm to use: ";
     cin >> MSS_to_use;
-    
+
     cout << "Please enter a size for your initial randomized array: ";
     cin >> m;
+
+    cout << "Please enter a size for your second randomized array: ";
+    cin >> n;
+    cout << endl;
+    cin.ignore();
+    // Creates the random arrays
+    get_random_array(randomized_array_m, m);
+    get_random_array(randomized_array_n, n);
     
+    cout << "Testing INITIAL ARRAY . . ." << endl;
+    running_time_of_m = runMSS(MSS_to_use, randomized_array_m, m);
     
+    predicted_running_time_of_n = get_predicted_running_time(running_time_of_m, m, n, MSS_to_use);
+    cout << "PREDICTED RUNNING TIME: " << predicted_running_time_of_n << " ns" << endl;
+    cout << "Testing SECOND ARRAY . . ." << endl;
+    running_time_of_n = runMSS(MSS_to_use, randomized_array_n, n);
+    
+    // Calculates the percent that the estimate was off by taking the difference
+    // of the running time and estimate, dividing it by the the running time of
+    // n, and multiplying it by 100
+    float pct_off_by = 100 * ( (float)abs(running_time_of_n-predicted_running_time_of_n) / (float)running_time_of_n);
+    cout << "Answer is off by " << setprecision(3) << pct_off_by << "%" << endl;
 }
 
 void Quit()    {
@@ -461,4 +411,143 @@ void get_random_array(int* &rand_array, int size_of_rand_array)  {
         rand_array[i] = (rand() % 101) - 50;
     }
     
+}
+
+
+// find the MSS that needs to be run and executes it.
+// This also returns the elapsed time from the operation that just ran
+int runMSS(int MSS_selection,int* array, int size_of_array)    {
+    int running_time = 0;
+    int max = 0;
+    Timer MSSTimer;
+    
+    switch (MSS_selection) {
+        case 1:
+            cout << "Running SOLUTION 1 . . ." << endl;
+            // Runs the algorithm and times it
+            MSSTimer.start_timer();
+            max = MSS1(array, size_of_array);
+            MSSTimer.stop_timer();
+            running_time = MSSTimer.get_time();
+            
+            // Displays the data from the trial
+            cout << "The maximum subarray from SOLUTION 1 is: " << max << endl;
+            cout << "The time elapsed by SOLUTION 1 is: " << MSSTimer.get_time() << " ns" << endl;
+            
+            // Resets data from trial to 0
+            cout << endl;
+            MSSTimer.reset_timer();
+            max = 0;
+            
+            break;
+        case 2:
+            cout << "Running SOLUTION 2 . . ." << endl;
+            // Runs the algorithm and times it
+            MSSTimer.start_timer();
+            max = MSS2(array, size_of_array);
+            MSSTimer.stop_timer();
+            running_time = MSSTimer.get_time();
+            
+            // Displays the data from the trial
+            cout << "The maximum subarray from SOLUTION 2 is: " << max << endl;
+            cout << "The time elapsed by SOLUTION 2 is: " << MSSTimer.get_time() << " ns" << endl;
+            
+            // Resets data from trial to 0
+            cout << endl;
+            MSSTimer.reset_timer();
+            max = 0;
+            
+            break;
+        case 3:
+            cout << "Running SOLUTION 3 . . ." << endl;
+            // Runs the algorithm and times it
+            MSSTimer.start_timer();
+            max = MSS3(array, 0, size_of_array-1);
+            MSSTimer.stop_timer();
+            running_time = MSSTimer.get_time();
+            
+            // Displays the data from the trial
+            cout << "The maximum subarray from SOLUTION 2 is: " << max << endl;
+            cout << "The time elapsed by SOLUTION 2 is: " << MSSTimer.get_time() << " ns" << endl;
+            
+            // Resets data from trial to 0
+            cout << endl;
+            MSSTimer.reset_timer();
+            max = 0;
+            
+            break;
+        case 4:
+            cout << "Running SOLUTION 4 . . ." << endl;
+            // Runs the algorithm and times it
+            MSSTimer.start_timer();
+            max = MSS4(array, size_of_array);
+            MSSTimer.stop_timer();
+            running_time = MSSTimer.get_time();
+            
+            // Displays the data from the trial
+            cout << "The maximum subarray from SOLUTION 4 is: " << max << endl;
+            cout << "The time elapsed by SOLUTION 4 is: " << MSSTimer.get_time() << " ns" << endl;
+            
+            // Resets data from trial to 0
+            cout << endl;
+            MSSTimer.reset_timer();
+            max = 0;
+            
+            break;
+        case 0:
+            break;
+        default:
+            cout << "Invalid selection" << endl;
+            break;
+    }
+    return running_time;
+}
+
+
+// Predicts the running time of an array of size n based off of T and m.
+int get_predicted_running_time(int T, int m, int n, int MSS_num)    {
+    // Each algorithm effects running time differently, becuase the implementation
+    // effects the growth rate. When I wrote each function, I estimated the growth
+    // rate of each of the functions. They were:
+    //      MSS1: O(n^3)
+    //      MSS2: O(n^2)
+    //      MSS3: O(n lg(n))
+    //      MSS4: O(n)
+    // Knowing this, I can estimate the time per operation of my computer. I can also
+    // estimate the number of operations that will get done.
+    int predicted_running_time = 0;
+    int num_of_operations_from_m;
+    int num_of_operations_from_n;
+    float time_per_operation;
+    switch (MSS_num) {
+        case 1:
+            num_of_operations_from_m = pow(m,3);
+            num_of_operations_from_n = pow(n,3);
+            time_per_operation = (float)T / (float)num_of_operations_from_m;
+            predicted_running_time = (int)((float)num_of_operations_from_n * time_per_operation);
+            break;
+        case 2:
+            num_of_operations_from_m = pow(m,2);
+            num_of_operations_from_n = pow(n,2);
+            time_per_operation = (float)T / (float)num_of_operations_from_m;
+            predicted_running_time = (int)((float)num_of_operations_from_n * time_per_operation);
+            break;
+        case 3:
+            num_of_operations_from_m = m * log2(m);
+            num_of_operations_from_n = n * log2(n);
+            time_per_operation = (float)T / (float)num_of_operations_from_m;
+            predicted_running_time = (int)((float)num_of_operations_from_n * time_per_operation);
+            break;
+        case 4:
+            num_of_operations_from_m = m;
+            num_of_operations_from_n = n;
+            time_per_operation = (float)T / (float)num_of_operations_from_m;
+            predicted_running_time = (int)((float)num_of_operations_from_n * time_per_operation);
+            break;
+        default:
+            cout << "Invalid selection" << endl;
+            break;
+    }
+    
+    return predicted_running_time;
 }
