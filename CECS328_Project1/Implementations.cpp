@@ -10,8 +10,8 @@
 #include <iomanip>
 #include "Implementations.hpp"
 #include "Timer.hpp"
-
 #include <algorithm>
+
 using namespace std;
 
 
@@ -267,6 +267,7 @@ void Step2()   {
         int running_time = runMSS(array_of_MSS_selections[i], randomized_array, size_of_randomized_array);
     }
     
+    delete array_of_MSS_selections;
     delete randomized_array;
 }
 
@@ -309,6 +310,9 @@ void Step3()    {
     // n, and multiplying it by 100
     float pct_off_by = 100 * ( (float)abs(running_time_of_n-predicted_running_time_of_n) / (float)running_time_of_n);
     cout << "Answer is off by " << setprecision(3) << pct_off_by << "%" << endl;
+    
+    delete randomized_array_m;
+    delete randomized_array_n;
 }
 
 void Quit()    {
